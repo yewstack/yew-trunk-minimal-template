@@ -1,10 +1,10 @@
 [package]
-name = "trunk_template"
+name = "trunk-template"
 version = "0.1.0"
 edition = "2018"
 description = "Template for starting a Yew project using Trunk"
 readme = "README.md"
-repository = "https://github.com/yewstack/trunk-template"
+repository = "https://github.com/yewstack/yew-trunk-minimal-template"
 license = "MIT OR Apache-2.0"
 keywords = ["yew", "trunk"]
 categories = ["gui", "wasm", "web-programming"]

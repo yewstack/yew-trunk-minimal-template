@@ -35,7 +35,7 @@ trunk serve
 
 Rebuilds the app whenever a change is detected and runs a local server to host it.
 
-There's also the `trunk watch` command which does the same thing but without hosting a server for you.
+There's also the `trunk watch` command which does the same thing but without hosting it.
 
 ### Release
 
@@ -55,7 +55,6 @@ There are a few things you have to adjust when adopting this template.
 ### Remove example code
 
 The code in [src/main.rs](src/main.rs) specific to the example is limited to only the `view` method.
-You can keep the rest.
 There is, however, a fair bit of Sass in [index.scss](index.scss) you can remove.
 
 ### Update metadata
@@ -70,6 +69,6 @@ Finally, you should update this very `README` file to be about your app.
 The template ships with both the Apache and MIT license.
 If you don't want to have your app dual licensed, just remove one (or both) of the files and update the `license` field in `Cargo.toml`.
 
-There are also two empty spaces in the MIT license you need to fill out. Particularly `{{year}}` and `{{authors}}`.
+There are two empty spaces in the MIT license you need to fill out: `{{year}}` and `{{authors}}`.
 
 [trunk]: https://github.com/thedodd/trunk
