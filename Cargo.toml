@@ -1,7 +1,7 @@
 [package]
 name = "trunk-template"
 version = "0.1.0"
-edition = "2018"
+edition = "2021"
 description = "Template for starting a Yew project using Trunk"
 readme = "README.md"
 repository = "https://github.com/yewstack/yew-trunk-minimal-template"
@@ -11,4 +11,4 @@ categories = ["gui", "wasm", "web-programming"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [dependencies]
-yew = "0.17"
+yew = "0.18"
