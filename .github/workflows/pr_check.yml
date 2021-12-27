@@ -1,4 +1,4 @@
-name: Rust
+name: pr_check
 
 on:
   workflow_dispatch:
@@ -21,6 +21,6 @@ jobs:
       with:
         version: 'latest'
     - name: Build
-      run: trunk build --verbose
+      run: trunk build
     - name: Run tests
       run: cargo test --verbose
