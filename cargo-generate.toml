@@ -1,5 +1,8 @@
 [template]
 cargo_generate_version = ">=0.9.0"
 
+[placeholders]
+yew_version = { prompt = "Yew version", choices = ["stable", "next"], default = "stable", type = "string" }
+
 [hooks]
 pre = ["cargo-generate/configure_files.rhai"]
