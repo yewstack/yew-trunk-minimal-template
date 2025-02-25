@@ -123,4 +123,18 @@ fn main() {
         template_manifest_dir.join("Cargo.toml"),
     )
     .unwrap();
+
+    let md = std::fs::read_to_string(template_manifest_dir.join("README.md")).unwrap();
+    let update_instruction = "Update the `name`,";
+    assert_eq!(md.match_indices(update_instruction).count(), 1);
+    let new_md = md.replace(update_instruction, "Update the");
+    let if_you_cloned = "If you cloned";
+    assert_eq!(new_md.match_indices(if_you_cloned).count(), 1);
+    let new_md = new_md
+        .lines()
+        .filter(|l| !l.starts_with(if_you_cloned))
+        .collect::<Vec<&str>>()
+        .join("\n");
+
+    std::fs::write(cargo_gen_dir.join("README.md"), new_md).unwrap();
 }
