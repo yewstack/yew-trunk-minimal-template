@@ -136,5 +136,5 @@ fn main() {
         .collect::<Vec<&str>>()
         .join("\n");
 
-    std::fs::write(cargo_gen_dir.join("README.md"), new_md).unwrap();
+    std::fs::write(cargo_gen_dir.join("_README.md"), new_md).unwrap();
 }

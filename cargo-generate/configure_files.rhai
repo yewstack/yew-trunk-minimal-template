@@ -8,7 +8,7 @@ switch variable::get("yew_version"){
     file::rename("cargo-generate/Cargo.toml.next", "Cargo.toml");
   }
 }
-file::rename("cargo-generate/README.md", "README.md");
+file::rename("cargo-generate/_README.md", "README.md");
 
 file::delete("cargo-generate");
 file::delete(".github");
