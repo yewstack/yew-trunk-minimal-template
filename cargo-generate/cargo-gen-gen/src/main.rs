@@ -71,7 +71,7 @@ fn main() {
     std::fs::rename(
         template_manifest_dir.join("Cargo.lock"),
         template_manifest_dir.join("Cargo.lock.orig"),
-    ).unwrap_or_else(|_| {});
+    ).unwrap_or({});
 
     // Generate 4 combinations of Cargo.toml.liquid and Cargo.lock.liquid files
     let configs = [
@@ -139,7 +139,7 @@ fn main() {
     std::fs::rename(
         template_manifest_dir.join("Cargo.lock.orig"),
         template_manifest_dir.join("Cargo.lock"),
-    ).unwrap_or_else(|_| {});
+    ).unwrap_or({});
 
     // Process README
     let md = std::fs::read_to_string(template_manifest_dir.join("README.md")).unwrap();
