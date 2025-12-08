@@ -1,7 +1,7 @@
 use yew::prelude::*;
 
-#[function_component(App)]
-pub fn app() -> Html {
+#[component]
+pub fn App() -> Html {
     html! {
         <main>
             <img class="logo" src="https://yew.rs/img/logo.svg" alt="Yew logo" />
