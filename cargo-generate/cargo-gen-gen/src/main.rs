@@ -106,7 +106,7 @@ fn main() {
 
         // Generate lock file
         println!("  Generating lock file...");
-        Command::new("/usr/bin/cargo")
+        Command::new("cargo")
             .arg("update")
             .arg("--quiet")
             .current_dir(template_manifest_dir)
