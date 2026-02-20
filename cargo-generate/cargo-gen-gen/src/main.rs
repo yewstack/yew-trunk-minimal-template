@@ -1,6 +1,18 @@
 use std::path::PathBuf;
 use std::process::Command;
 
+struct TracingDeps {
+    tracing: &'static str,
+    tracing_subscriber: &'static str,
+    tracing_web: &'static str,
+}
+
+const TRACING_DEPS: TracingDeps = TracingDeps {
+    tracing: "tracing = \"0.1.44\"",
+    tracing_subscriber: "tracing-subscriber = { version = \"0.3.22\", features = [\"fmt\"] }",
+    tracing_web: "tracing-web = \"0.1.3\"",
+};
+
 fn main() {
     let manifest_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
     let template_manifest_dir = manifest_dir.parent().unwrap().parent().unwrap();
@@ -48,9 +60,9 @@ fn main() {
                 if l.starts_with("yew =") {
                     vec![
                         l,
-                        "tracing = \"0.1\"".to_string(),
-                        "tracing-subscriber = { version = \"0.3\", features = [\"fmt\"] }".to_string(),
-                        "tracing-web = \"0.1\"".to_string(),
+                        TRACING_DEPS.tracing.to_string(),
+                        TRACING_DEPS.tracing_subscriber.to_string(),
+                        TRACING_DEPS.tracing_web.to_string(),
                     ]
                 } else {
                     vec![l]
@@ -62,16 +74,18 @@ fn main() {
 
     // Save original Cargo.toml
     let original_cargo_toml = std::fs::read_to_string(&template_manifest).unwrap();
-    
+
     // Back up original files
     std::fs::rename(
         template_manifest_dir.join("Cargo.toml"),
         template_manifest_dir.join("Cargo.toml.orig"),
-    ).unwrap();
+    )
+    .unwrap();
     std::fs::rename(
         template_manifest_dir.join("Cargo.lock"),
         template_manifest_dir.join("Cargo.lock.orig"),
-    ).unwrap_or({});
+    )
+    .unwrap_or({});
 
     // Generate 4 combinations of Cargo.toml.liquid and Cargo.lock.liquid files
     let configs = [
@@ -85,10 +99,17 @@ fn main() {
         let suffix = format!(
             ".{}.{}",
             yew_version,
-            if *with_tracing { "tracing" } else { "no-tracing" }
+            if *with_tracing {
+                "tracing"
+            } else {
+                "no-tracing"
+            }
         );
-        
-        println!("Generating config for: yew={}, tracing={}", yew_version, with_tracing);
+
+        println!(
+            "Generating config for: yew={}, tracing={}",
+            yew_version, with_tracing
+        );
 
         // Create the appropriate Cargo.toml
         let mut cargo_toml_content = if *yew_version == "next" {
@@ -123,23 +144,27 @@ fn main() {
         std::fs::write(
             cargo_gen_dir.join(format!("Cargo.toml{}.liquid", suffix)),
             cargo_toml_liquid,
-        ).unwrap();
+        )
+        .unwrap();
 
         std::fs::write(
             cargo_gen_dir.join(format!("Cargo.lock{}.liquid", suffix)),
             lock_liquid,
-        ).unwrap();
+        )
+        .unwrap();
     }
 
     // Restore original files
     std::fs::rename(
         template_manifest_dir.join("Cargo.toml.orig"),
         template_manifest_dir.join("Cargo.toml"),
-    ).unwrap();
+    )
+    .unwrap();
     std::fs::rename(
         template_manifest_dir.join("Cargo.lock.orig"),
         template_manifest_dir.join("Cargo.lock"),
-    ).unwrap_or({});
+    )
+    .unwrap_or({});
 
     // Process README
     let md = std::fs::read_to_string(template_manifest_dir.join("README.md")).unwrap();
@@ -155,6 +180,6 @@ fn main() {
         .join("\n");
 
     std::fs::write(cargo_gen_dir.join("_README.md"), new_md).unwrap();
-    
+
     println!("Successfully generated 4 template combinations!");
 }
