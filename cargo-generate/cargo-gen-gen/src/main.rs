@@ -8,9 +8,9 @@ struct TracingDeps {
 }
 
 const TRACING_DEPS: TracingDeps = TracingDeps {
-    tracing: "tracing = \"0.1.44\"",
-    tracing_subscriber: "tracing-subscriber = { version = \"0.3.22\", features = [\"fmt\"] }",
-    tracing_web: "tracing-web = \"0.1.3\"",
+    tracing: "tracing = \"0.1\"",
+    tracing_subscriber: "tracing-subscriber = { version = \"0.3\", features = [\"fmt\"] }",
+    tracing_web: "tracing-web = \"0.1\"",
 };
 
 fn main() {
